@@ -14,4 +14,3 @@ rm -f s6-overlay-amd64.tar.gz
 COPY container-files /
 
 ENTRYPOINT ["/init"]
-
