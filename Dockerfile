@@ -1,7 +1,7 @@
 FROM centos:centos7
 MAINTAINER Jordan Clark jordan.clark@esu10.org
 
-ENV S6_OVERLAY_VERSION 1.19.0.0
+ENV S6_OVERLAY_VERSION 1.19.1.0
 
 COPY container-files /
 
