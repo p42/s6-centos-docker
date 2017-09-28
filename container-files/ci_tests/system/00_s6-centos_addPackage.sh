@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/with-conenv sh
 
 # Shell Colors
 set_shell_error() {
