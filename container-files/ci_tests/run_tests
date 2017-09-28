@@ -5,46 +5,80 @@
 # In keeping with standard testing prodcedures,
 # each test should be singular (at least as much as is possible).
 
-
-# If no input set it to "all"
-if [ $# -eq 0 ]; then
-  TESTS="all"
-  echo "No tests supplied running all tests"
-else # use input as test directory
-  TESTS=$1
-  if [ -d /ci_tests/${TESTS} ]; then
-    echo "running tests only from /ci_tests/${TESTS}/"
-  else
-    echo "/ci_tests/${TESTS} is not a valid test directory, Failing"
-    exit 1
-  fi # end input directory
-fi # end input
-
 # Execute tests function
 execute_tests() {
   FUNCTION_INPUT=$1
   if [ -d "${FUNCTION_INPUT}" ]; then                  # Test that it is a directory
-    echo "running tests in ${FUNCTION_INPUT}/"
-    for FILE in ${FUNCTION_INPUT}/*; do      # Walk through items in the directory
-      if [ -x ${FILE} ] && [ -f ${FILE} ]; then       # Make sure it is executable and a file
-        echo "executing test: ${FILE}"
-        ${FILE}                                   # Execute the test
-        # $? gives us the exit code of the previous process (last file to run)
-        # which allows us to print fail if a test fails.
-        # Please make sure and print reasons for failure.
-        RC=$?                                     # Read in the exit code
-        if [[ ${RC} != 0 ]]; then                 # Did the test fail?
-          # If a file returned non-zero, print out that file so we have some testing recourse.
-          echo "${FILE} exited with non-zero exit code"
-          exit ${RC};                             # Exit and return the non-zero exit code
-        fi # end test failed
-      else # not executable or a file
-        echo "skipping ${FILE} because it is not executable or not a file"
-      fi # end executable test
-    done # end of items in directory
-  fi # end Test directory
+  echo -e "\e[1m" # Style: bold
+  echo -e "\e[33m" # Text Color: Yellow
+  echo "running tests in ${FUNCTION_INPUT}/"
+  echo -e "\e[0m" # Reset all shell attributes
+  for FILE in ${FUNCTION_INPUT}/*; do      # Walk through items in the directory
+  if [ -x ${FILE} ] && [ -f ${FILE} ]; then       # Make sure it is executable and a file
+  echo -e "\e[1m" # Style: bold
+  echo -e "\e[33m" # Text Color: Yellow
+  echo "executing test: ${FILE}"
+  echo -e "\e[0m" # Reset all shell attributes
+  ${FILE}                                   # Execute the test
+  # $? gives us the exit code of the previous process (last file to run)
+  # which allows us to print fail if a test fails.
+  # Please make sure and print reasons for failure.
+  RC=$?                                     # Read in the exit code
+  if [[ ${RC} != 0 ]]; then                 # Did the test fail?
+  # If a file returned non-zero, print out that file so we have some testing recourse.
+  echo -e "\e[1m" # Style: bold
+  echo -e "\e[5m" # Style: blink
+  echo -e "\e[31m" # Text Color: Red
+  echo "${FILE} exited with non-zero exit code"
+  echo -e "\e[0m" # Reset all shell attributes
+  exit ${RC};                             # Exit and return the non-zero exit code
+else                                      # Test passed
+  echo -e "\e[1m" # Style: bold
+  echo -e "\e[32m" # Text Color: Green
+  echo "${FILE} test passed"
+  echo -e "\e[0m" # Reset all shell attributes
+fi # end test failed
+else # not executable or a file
+  echo -e "\e[1m" # Style: bold
+  echo -e "\e[35m" # Text Color: Magenta
+  echo "skipping ${FILE} because it is not executable or not a file"
+  echo -e "\e[0m" # Reset all shell attributes
+fi # end executable test
+done # end of items in directory
+fi # end Test directory
 }
 
+# If no input set it to "all"
+if [ $# -eq 0 ]; then
+  TESTS="all"
+  echo -e "\e[1m" # Style: bold
+  echo -e "\e[33m" # Text Color: Yellow
+  echo -e "No tests supplied running all tests"
+  echo -e "\e[0m" # Reset all shell attributes
+else # use input as test directory
+  TESTS=$1
+  if [[ ${TESTS} == "all" ]]; then
+    echo -e "\e[1m" # Style: bold
+    echo -e "\e[33m" # Text Color: Yellow
+    echo -e "All tests will be run"
+    echo -e "\e[0m" # Reset all shell attributes
+    [ ! -d /ci_tests/all ] || echo -e "\e[1m\e[35mWarning: a test directory /ci_tests/all exists, this may not work as you want\e[0m"
+  else
+    if [ -d /ci_tests/${TESTS} ]; then
+      echo -e "\e[1m" # Style: bold
+      echo -e "\e[33m" # Text Color: Yellow
+      echo -e "running tests only from /ci_tests/${TESTS}/"
+      echo -e "\e[0m" # Reset all shell attributes
+    else
+      echo -e "\e[1m" # Style: bold
+      echo -e "\e[5m" # Style: blink
+      echo -e "\e[31m" # Text Color: Red
+      echo -e "/ci_tests/${TESTS} is not a valid test directory, Failing"
+      echo -e "\e[0m" # Reset all shell attributes
+      exit 1
+    fi # end input directory
+  fi # end input not all
+fi # end input
 
 if [[ ${TESTS} == "all" ]]; then                  # Run all tests
   for DIRECTORY in /ci_tests/*; do                # Walk through all items in /ci_tests/
