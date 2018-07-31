@@ -1,5 +1,5 @@
 FROM centos:centos7
-MAINTAINER Jordan Clark jordan.clark@esu10.org
+MAINTAINER Jordan Clark mail@jordanclark.us
 
 ENV S6_OVERLAY_VERSION 1.20.0.0
 ENV S6_OVERLAY_MD5HASH 86f62d1c3c7958fe244b4a864977bae8
