@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:latest
 MAINTAINER Jordan Clark mail@jordanclark.us
 
 ARG S6_OVERLAY_VERSION=1.22.1.0
