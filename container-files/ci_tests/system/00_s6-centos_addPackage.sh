@@ -74,18 +74,30 @@ if ! $EPEL_INSTALLED; then
   fi
   yum -y update
 fi
+yum list installed epel-release
+if [ $? -eq 0 ]; then
+  EPEL_INSTALLED=true
+fi
+
 
 if ! $FORTUNE_INSTALLED; then
-  yum -y install fortune-mod
-  yum list installed fortune-mod
-  if [ $? -ne 0 ]; then
+  yum list available fortune-mod
+  if [ $? -eq 0 ]; then
+    yum -y install fortune-mod
+    yum list installed fortune-mod
+    if [ $? -ne 0 ]; then
 
-    set_shell_error
-    echo -e "TEST: installation of fortune-mod FAILED"
-    reset_shell
+      set_shell_error
+      echo -e "TEST: installation of fortune-mod FAILED"
+      reset_shell
 
-    exit 1
+      exit 1
+    fi
   fi
+fi
+yum list installed fortune-mod
+if [ $? -eq 0 ]; then
+  FORTUNE_INSTALLED=true
 fi
 
 if ! $COWSAY_INSTALLED; then
@@ -100,8 +112,19 @@ if ! $COWSAY_INSTALLED; then
     exit 1
   fi
 fi
+yum list installed cowsay
+if [ $? -eq 0 ]; then
+  COWSAY_INSTALLED=true
+fi
 
-fortune | cowsay -n
+
+
+if $FORTUNE_INSTALLED; then
+  fortune | cowsay -n
+else
+  cowsay `curl https://api.ef.gy/fortune`
+fi
+
 if [ $? -ne 0 ]; then
 
   set_shell_error
@@ -113,7 +136,7 @@ fi
 
 
 # Clean up time
-if ! $COWSAY_INSTALLED; then
+if $COWSAY_INSTALLED; then
 
   set_shell_info
   echo "uninstalling cowsay"
@@ -122,7 +145,7 @@ if ! $COWSAY_INSTALLED; then
   yum -y -q remove cowsay
 fi
 
-if ! $FORTUNE_INSTALLED; then
+if $FORTUNE_INSTALLED; then
 
   set_shell_info
   echo "uninstalling fortune-mod"
@@ -131,7 +154,7 @@ if ! $FORTUNE_INSTALLED; then
   yum -y -q remove fortune-mod
 fi
 
-if ! $EPEL_INSTALLED; then
+if $EPEL_INSTALLED; then
 
   set_shell_info
   echo "uninstalling epel-release"
