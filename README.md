@@ -17,16 +17,21 @@ The [s6-overlay project](https://github.com/just-containers/s6-overlay) is a ser
 | Tag | Description |
 |---|---|
 | latest | The most current build.  Images based on latest may change often an possibly could break.  Test your images |
-| centos7 | Latest CentOS 7 series |
-| centos6 | Latest CentOS 6 series |
+| 8, centos8 | Latest CentOS 8 series |
+| 7, centos7 | Latest CentOS 7 series |
+| 6, centos6 | Latest CentOS 6 series |
+| 8.2.2004 | CentOS Linux 8.2.2004 built on 2020-12-03 |
 | 7.7.1908 | CentOS Linux 7.7.1908 built on 2019-11-21 |
 | 7.5.1804 | CentOS Linux 7.5.1804 built on 2018-07-31 |
 | 6.9 | CentOS Linux 6.9 built on 2018-07-31 |
+| 2.1.0.2 | CentOS 8.2.2004 with S6 Overlay v2.1.0.2 built on 2020-12-03 |
 | 1.22.1.0 | CentOS 7.7.1908 with S6 Overlay v1.22.1.0 built on 2019-11-21 |
 | 1.21.4.0 | CentOS 7.5.1804 with S6 Overlay v1.21.4.0 built on 2018-07-31 |
 | 1.20.0.0 | CentOS 7.4.1708 with S6 Overlay v1.20.0.0 built on 2017-09-19 |
 | 1.19.1.1 | CentOS 7.4.1708 with S6 Overlay v1.20.0.0 built on 2017-09-19 |
 | 1.18.1.5 | CentOS 7.2.1511 with S6 Overlay v1.20.0.0 built on 2016-09-30 |
+| centos8-2.1.0.2 | CentOS 8.2.2004 with S6 Overlay v2.1.0.1 built on 2020-12-03 |
+| centos7-2.1.0.2 | CentOS 7.9.2009 with S6 Overlay v2.1.0.1 built on 2020-12-03 |
 | centos7-1.22.1.0 | CentOS 7.7.1908 with S6 Overlay v1.22.1.0 built on 2019-11-21 |
 | centos7-1.21.4.0 | CentOS 7.5.1804 with S6 Overlay v1.21.4.0 built on 2018-07-31 |
 | centos7-1.20.0.0 | CentOS 7.4.1708 with S6 Overlay v1.20.0.0 built on 2017-09-19 |
