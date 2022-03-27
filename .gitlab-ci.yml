@@ -7,6 +7,7 @@ variables:
   IMAGE_NAME: "s6-centos"
   IMAGE_TAG: "latest"
   GITHUB_PROJECT: "p42/s6-centos-docker.git"
+  DOCKER_HUB_IMAGE: "project42/s6-centos"
 
 before_script:
   - docker info
@@ -82,3 +83,13 @@ deploy_tags_to_github:
   only:
     - tags
 
+push_to_docker_hub:
+  tags:
+    - docker
+    - docker-hub
+  stage: build
+  script:
+    - docker image tag ${IMAGE_NAME}:${CI_COMMIT_REF_NAME} ${DOCKER_HUB_IMAGE}
+    - docker push ${DOCKER_HUB_IMAGE} 
+  except:
+    - master
