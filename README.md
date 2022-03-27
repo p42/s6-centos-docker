@@ -17,9 +17,9 @@ The [s6-overlay project](https://github.com/just-containers/s6-overlay) is a ser
 | Tag | Description |
 |---|---|
 | latest | The most current build.  Images based on latest may change often an possibly could break.  Test your images |
-| 8, centos8 | Latest CentOS 8 series |
+| 8, centos8 | Latest CentOS 8 series EOL |
 | 7, centos7 | Latest CentOS 7 series |
-| 6, centos6 | Latest CentOS 6 series |
+| 6, centos6 | Latest CentOS 6 series EOL |
 | 8.2.2004 | CentOS Linux 8.2.2004 built on 2020-12-03 |
 | 7.7.1908 | CentOS Linux 7.7.1908 built on 2019-11-21 |
 | 7.5.1804 | CentOS Linux 7.5.1804 built on 2018-07-31 |
