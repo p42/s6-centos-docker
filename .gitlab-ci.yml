@@ -81,3 +81,4 @@ deploy_tags_to_github:
     - git push git@github.com:${GITHUB_PROJECT} ${CI_COMMIT_REF_NAME} --tags
   only:
     - tags
+
