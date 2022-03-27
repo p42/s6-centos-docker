@@ -89,7 +89,7 @@ push_to_docker_hub:
     - docker-hub
   stage: build
   script:
-    - docker image tag ${IMAGE_NAME}:${CI_COMMIT_REF_NAME} ${DOCKER_HUB_IMAGE}
-    - docker push ${DOCKER_HUB_IMAGE} 
+    - docker image tag ${IMAGE_NAME}:${CI_COMMIT_REF_NAME} ${DOCKER_HUB_IMAGE}:${CI_COMMIT_REF_NAME}
+    - docker push ${DOCKER_HUB_IMAGE}:${CI_COMMIT_REF_NAME}
   except:
     - master
